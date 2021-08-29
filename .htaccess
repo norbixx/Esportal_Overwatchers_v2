@@ -1,0 +1,24 @@
+IndexIgnore * # prevent directory listing
+
+Order deny,allow
+Allow from *
+
+# ------------------------------------------
+# Rewrite so that php extentions are not shown
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php
+
+RewriteRule ^panel/([0-9]+) panel.php?page=$1
+RewriteRule ^cups/([0-9]+) cups.php?page=$1
+RewriteRule ^history/([0-9]+) history.php?page=$1
+RewriteRule ^hero-league/([0-9a-zA-Z]+) hero-league.php?date=$1
+RewriteRule ^myreports/([0-9]+) myreports.php?page=$1
+RewriteRule ^profile/([0-9a-zA-Z]+) profile.php?name=$1
+RewriteRule ^admin/([0-9a-zA-Z]+) admin.php?request=$1
+RewriteRule ^admin/donereports/([0-9]+) admin.php?request=$1&page=$2
+RewriteRule ^admin/([0-9a-zA-Z]+)/([0-9]+) admin.php?request=$1&page=$2
+RewriteRule ^report/([0-9]+)/view report.php?id=$1&view=true
+RewriteRule ^report/([0-9]+) report.php?id=$1
